@@ -1,0 +1,73 @@
+h2 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: x-large;
+  color: white;
+}
+
+.Btn {
+  width: 90px;
+  height: 40px;
+  background-color: gray;
+  font-size: medium;
+  border: 0;
+  color: white;
+  margin-right: 10px;
+}
+
+.Feedback__Counter {
+  display: block;
+  margin: 0 auto;
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  background-color: rgb(4, 29, 4);
+  color: white;
+}
+
+.Feedback__Controls {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.Good.Btn {
+  background-color: green;
+}
+.Neutral.Btn {
+  background-color: orange;
+}
+.Bad.Btn {
+  background-color: red;
+}
+.Feedback__Statistics {
+  display: block;
+  margin: 0 auto;
+  padding: 5px;
+  text-align: center;
+}
+.Result {
+  margin-right: 10px;
+  width: auto;
+  height: auto;
+  border-radius: 5px;
+  display: inline-block;
+  font-weight: 900;
+}
+.Result .Value {
+  font-size: xx-large;
+  background-color: white;
+  padding: 0 5px 0;
+  border-radius: 5px;
+  margin: 5px;
+}
+.Good.Value {
+  color: green;
+}
+.Neutral.Value {
+  color: orange;
+}
+.Bad.Value {
+  color: red;
+}
+.Total.Value {
+  color: black;
+}
