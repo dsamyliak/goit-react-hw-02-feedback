@@ -6,50 +6,18 @@ import Statistics from "./components/Statistics/Statistics";
 import Notification from "./components/Notification/Notification";
 
 class App extends React.Component {
-  static defaultProps = {
-    goodValue: 0,
-    neutralValue: 0,
-    badValue: 0,
-    totalDef: 0,
-    positivePercantageDef: 0,
-  };
-
   static propTypes = {
     //
   };
 
   state = {
-    good: this.props.goodValue,
-    neutral: this.props.neutralValue,
-    bad: this.props.badValue,
+    good: 0,
+    neutral: 0,
+    bad: 0,
   };
 
-  // state = {
-  //     good: 0,
-  //     neutral: 0,
-  //     bad: 0
-  // };
-
-  goodIncrement = () => {
-    this.setState((prevState) => ({
-      good: prevState.good + 1,
-    }));
-
-    // this.setState({ good: 0 });
-  };
-  neutralIncrement = () => {
-    this.setState((prevState) => {
-      return {
-        neutral: prevState.neutral + 1,
-      };
-    });
-  };
-  badIncrement = () => {
-    this.setState((prevState) => ({
-      bad: prevState.bad + 1,
-    }));
-
-    // this.setState({ bad: 100 });
+  handleClick = (option) => {
+    this.setState((prevState) => ({ [option]: prevState[option] + 1 }));
   };
 
   countTotalFeedback = () => {
@@ -60,17 +28,18 @@ class App extends React.Component {
 
   countPositiveFeedbackPercentage = () => {
     const { good } = this.state;
-    let positivePercantage = Math.round(
+    let positivePercentage = Math.round(
       good > 0 ? (good / this.countTotalFeedback()) * 100 : 0
     );
 
-    return positivePercantage;
+    return positivePercentage;
   };
 
   render() {
     const { good, neutral, bad } = this.state;
     let total = good + neutral + bad;
 
+    console.log(Object.keys(this.state));
     console.log(this.countTotalFeedback());
     console.log(this.countPositiveFeedbackPercentage());
 
@@ -78,11 +47,8 @@ class App extends React.Component {
       <>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={"text"}
-            gIncr={this.goodIncrement}
-            nIncr={this.neutralIncrement}
-            bIncr={this.badIncrement}
-            onLeaveFeedback={this.props.totalDef}
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.handleClick}
           ></FeedbackOptions>
         </Section>
         <Section title="Statistics">
