@@ -19,12 +19,12 @@
   border: rgb(20, 0, 46) solid 1px;
 }
 
-.Good.Btn {
+.good.Btn {
   background-color: green;
 }
-.Neutral.Btn {
+.neutral.Btn {
   background-color: orange;
 }
-.Bad.Btn {
+.bad.Btn {
   background-color: red;
 }
