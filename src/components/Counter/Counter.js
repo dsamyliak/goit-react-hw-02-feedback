@@ -1,13 +1,17 @@
 import React from "react";
 import "./Counter.css";
+import Section from "../Section/Section";
+import FeedbackOptions from "../FeedbackOptions/FeedbackOptions";
+import Statistics from "../Statistics/Statistics";
+import Notification from "../Notification/Notification";
 
 class Counter extends React.Component {
   static defaultProps = {
     goodValue: 0,
     neutralValue: 0,
     badValue: 0,
-    total: 0,
-    positivePercantage: 0,
+    totalDef: 0,
+    positivePercantageDef: 0,
   };
 
   static propTypes = {
@@ -30,6 +34,8 @@ class Counter extends React.Component {
     this.setState((prevState) => ({
       good: prevState.good + 1,
     }));
+
+    // this.setState({ good: 0 });
   };
   neutralIncrement = () => {
     this.setState((prevState) => {
@@ -39,66 +45,60 @@ class Counter extends React.Component {
     });
   };
   badIncrement = () => {
-    // this.setState({ bad: 100 });
-
     this.setState((prevState) => ({
       bad: prevState.bad + 1,
     }));
+
+    // this.setState({ bad: 100 });
   };
 
-  countTotalFeedback = () =>
-    // this.setState({ total: 0 });
-    this.setState();
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    let total = good + neutral + bad;
+    return total;
+  };
 
-  countPositiveFeedbackPercentage = () => {};
+  countPositiveFeedbackPercentage = () => {
+    const { good } = this.state;
+    let positivePercantage = Math.round(
+      good > 0 ? (good / this.countTotalFeedback()) * 100 : 0
+    );
+
+    return positivePercantage;
+  };
 
   render() {
+    const { good, neutral, bad } = this.state;
+    let total = good + neutral + bad;
+
+    console.log(this.countTotalFeedback());
+    console.log(this.countPositiveFeedbackPercentage());
+
     return (
-      <div className="Feedback__Counter">
-        <h2 className="Feedback__Title">Please leave feedback</h2>
-
-        <div className="Feedback__Controls">
-          <button
-            type="button"
-            className="Good Btn"
-            onClick={this.goodIncrement}
-          >
-            Good
-          </button>
-          <button
-            type="button"
-            className="Neutral Btn"
-            onClick={this.neutralIncrement}
-          >
-            Neutral
-          </button>
-          <button type="button" className="Bad Btn" onClick={this.badIncrement}>
-            Bad
-          </button>
-        </div>
-
-        <h2 className="Statistics__Title">Statistics</h2>
-
-        <div className="Feedback__Statistics">
-          <span className="Good Result">
-            Good: <span className="Good Value">{this.state.good}</span>
-          </span>
-          <span className="Neutral Result">
-            Neutral: <span className="Neutral Value">{this.state.neutral}</span>
-          </span>
-          <span className="Bad Result">
-            Bad: <span className="Bad Value">{this.state.bad}</span>
-          </span>
-        </div>
-        <div className="Additional__Statistics">
-          <span className="Total Result">
-            Total:{" "}
-            <span className="Total Value">
-              {this.state.good + this.state.neutral + this.state.bad}
-            </span>
-          </span>
-        </div>
-      </div>
+      <>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={"text"}
+            gIncr={this.goodIncrement}
+            nIncr={this.neutralIncrement}
+            bIncr={this.badIncrement}
+            onLeaveFeedback={this.props.totalDef}
+          ></FeedbackOptions>
+        </Section>
+        <Section title="Statistics">
+          {total > 0 ? (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            ></Statistics>
+          ) : (
+            <Notification message="There is no feedback"></Notification>
+          )}
+        </Section>
+      </>
     );
   }
 }
