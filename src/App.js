@@ -4,12 +4,9 @@ import Section from "./components/Section/Section";
 import FeedbackOptions from "./components/FeedbackOptions/FeedbackOptions";
 import Statistics from "./components/Statistics/Statistics";
 import Notification from "./components/Notification/Notification";
+import PropTypes from "prop-types";
 
 class App extends React.Component {
-  static propTypes = {
-    //
-  };
-
   state = {
     good: 0,
     neutral: 0,
@@ -68,5 +65,15 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  state: PropTypes.arrayOf(
+    PropTypes.shape({
+      good: PropTypes.number.isRequired,
+      neutral: PropTypes.number.isRequired,
+      bad: PropTypes.number.isRequired,
+    })
+  ),
+};
 
 export default App;
