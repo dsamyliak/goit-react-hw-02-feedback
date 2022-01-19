@@ -1,20 +1,6 @@
 import React from "react";
 import "./FeedbackOptions.css";
 
-// const FeedbackOptions = ({ gIncr, nIncr, bIncr }) => (
-//   <div className="Feedback__Controls">
-//     <button type="button" className="Good Btn" onClick={gIncr}>
-//       Good
-//     </button>
-//     <button type="button" className="Neutral Btn" onClick={nIncr}>
-//       Neutral
-//     </button>
-//     <button type="button" className="Bad Btn" onClick={bIncr}>
-//       Bad
-//     </button>
-//   </div>
-// );
-
 const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
     <div className="Feedback__Controls">
@@ -22,10 +8,10 @@ const FeedbackOptions = ({ options, onLeaveFeedback }) => {
         <button
           key={option}
           type="button"
-          className={option + ` Btn`}
+          className={option.charAt(0).toUpperCase() + option.slice(1) + ` Btn`}
           onClick={() => onLeaveFeedback(option)}
         >
-          {option}
+          {option.charAt(0).toUpperCase() + option.slice(1)}
         </button>
       ))}
     </div>
